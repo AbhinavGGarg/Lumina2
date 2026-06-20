@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Toaster } from "sonner";
-import { HelpChatWidget } from "@/components/help-chat-widget";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
@@ -43,7 +42,6 @@ export default function RootLayout({
       >
         <SiteHeader />
         {children}
-        <HelpChatWidget />
         <Toaster richColors theme="system" />
       </body>
     </html>

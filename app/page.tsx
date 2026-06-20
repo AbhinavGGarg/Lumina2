@@ -119,7 +119,7 @@ export default function Home() {
         }
       } catch {
         if (!disposed) {
-          setStreamWarning("Connection is unstable. Retrying scan updates...");
+          setStreamWarning("Still checking scan progress...");
         }
       }
     };
@@ -128,7 +128,7 @@ export default function Home() {
       if (disposed) return;
       if (pollingRef.current !== null) return;
       setStreamMode("polling");
-      setStreamWarning("Live stream dropped. Switched to reliable polling.");
+      setStreamWarning("Live updates paused. Polling for progress.");
       void pullSnapshot();
       pollingRef.current = window.setInterval(() => {
         void pullSnapshot();
