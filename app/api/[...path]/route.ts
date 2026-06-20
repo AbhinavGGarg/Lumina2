@@ -2,7 +2,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const LOCAL_BACKEND_URL = "http://localhost:8000";
-const HOSTED_BACKEND_URL = "https://lumina2-production.up.railway.app";
+const HOSTED_BACKEND_URL = "https://lumina2-backend.onrender.com";
 
 type RouteContext = {
   params: Promise<{ path: string[] }>;
@@ -83,7 +83,7 @@ async function proxyRequest(request: Request, context: RouteContext): Promise<Re
 
     return Response.json(
       {
-        detail: `Failed to reach Lumina backend at ${backendBase}. Check that the Railway service is online and BACKEND_API_URL is correct.`,
+        detail: `Failed to reach Lumina backend at ${backendBase}. Check that the Render service is online and BACKEND_API_URL is correct.`,
       },
       { status: 502 },
     );

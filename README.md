@@ -89,6 +89,30 @@ If the frontend is deployed separately from the backend, configure one of these:
 
 Without one of these, scan requests from the deployed UI will fail.
 
+## Render backend setup
+
+Render can deploy the backend from `render.yaml` as a Docker web service.
+
+1. In Render, create a new Blueprint from this GitHub repo.
+2. Choose the `lumina2-backend` service.
+3. Add the secret values Render asks for:
+```bash
+OPENAI_API_KEY=<your-featherless-key>
+OPENAI_MODEL=<your-featherless-model>
+```
+4. After it deploys, verify:
+```bash
+https://lumina2-backend.onrender.com/health
+```
+5. In Vercel, set:
+```bash
+BACKEND_API_URL=https://lumina2-backend.onrender.com
+```
+6. Redeploy the Vercel frontend.
+
+If Render gives the service a different URL, use that exact URL for
+`BACKEND_API_URL`.
+
 ### No-pay quick fix (works today)
 
 If you do not want paid APIs/hosting, run backend locally and expose it with a free tunnel:

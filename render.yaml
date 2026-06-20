@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: lumina2-backend
+    runtime: docker
+    plan: free
+    dockerfilePath: ./docker/Dockerfile.backend
+    healthCheckPath: /health
+    envVars:
+      - key: LLM_PROVIDER
+        value: openai
+      - key: OPENAI_BASE_URL
+        value: https://api.featherless.ai/v1
+      - key: OPENAI_MODEL
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_REQUEST_TIMEOUT_SECONDS
+        value: "12"
+      - key: CORS_ALLOW_ORIGINS
+        value: http://localhost:3000,https://lumina2-two.vercel.app
+      - key: ENFORCE_TARGET_ALLOWLIST
+        value: "false"
+      - key: REPO_CLONE_ROOT
+        value: /tmp/lumina/repos
+      - key: REPO_CLONE_TIMEOUT_SECONDS
+        value: "180"
+      - key: REPO_CLONE_DEPTH
+        value: "1"
