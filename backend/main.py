@@ -11,7 +11,8 @@ from .routers.scan_router import router as scan_router
 app = FastAPI(title="Lumina Pentest API")
 
 _origins_env = os.getenv(
-    "CORS_ALLOW_ORIGINS", "http://localhost:3000,http://frontend:3000"
+    "CORS_ALLOW_ORIGINS",
+    "http://localhost:3000,http://frontend:3000,https://lumina2-two.vercel.app",
 )
 ALLOWED_ORIGINS = [origin.strip() for origin in _origins_env.split(",") if origin.strip()]
 
@@ -23,10 +24,16 @@ app.add_middleware(
 )
 
 
+@app.get("/")
+@app.get("/health")
 @app.get("/hello")
-def hello():
-    """Health check — kept for backwards compatibility."""
-    return {"message": "Lumina Pentest API is running"}
+def health_check():
+    """Health check for browsers, Railway, and the frontend proxy."""
+    return {
+        "status": "ok",
+        "message": "Lumina Pentest API is running",
+        "api": "/api",
+    }
 
 
 app.include_router(scan_router)
